@@ -16,16 +16,24 @@ import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequestBuilder;
 import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.search.SearchRequestBuilder;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.AdminClient;
 import org.elasticsearch.client.IndicesAdminClient;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.TermQueryBuilder;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import scala.concurrent.duration.Duration;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -53,6 +61,7 @@ public class EsStorage extends UntypedActor {
         private String index;
         private String document;
         private String json;
+        private Map<String, String> queryFields;
 
         private EsCmd() {
         }
@@ -96,6 +105,18 @@ public class EsStorage extends UntypedActor {
         }
 
         /**
+         * Get the query fields
+         * @return
+         */
+        public Map<String, String> getQueryFields() {
+            return queryFields;
+        }
+
+        public void setQueryFields(Map<String, String>queryFields) {
+            this.queryFields = queryFields;
+        }
+
+        /**
          * The JSON for the insert
          * @return
          */
@@ -109,6 +130,7 @@ public class EsStorage extends UntypedActor {
                     "command=" + command +
                     ", index='" + index + '\'' +
                     ", document='" + document + '\'' +
+                    ", queryFields='" + queryFields + '\'' +
                     ", json='" + json + '\'' +
                     '}';
         }
@@ -139,6 +161,7 @@ public class EsStorage extends UntypedActor {
                     DeleteIndexResponse dir = dirb.get();
 
                     status = dir.isAcknowledged() ? 1 : 0;
+                    this.getSender().tell("Results: " + status, this.getSelf());
 
                     break;
                 case INSERT:
@@ -150,6 +173,7 @@ public class EsStorage extends UntypedActor {
                     IndexResponse resp = irb.get();
 
                     status = resp.status().getStatus();
+                    this.getSender().tell("Results: " + status, this.getSelf());
                     break;
                 case BUFFER:
                     if (brb == null) {
@@ -172,13 +196,47 @@ public class EsStorage extends UntypedActor {
                     else {
                         status = 0;
                     }
+                    this.getSender().tell("Results: " + status, this.getSelf());
                     break;
                 case QUERY:
+                    SearchRequestBuilder srb =
+                            client.prepareSearch(cmd.getIndex());
+
+//                    client.prepareSearch(cmd.getIndex()) /*.setTypes(cmd.getDocument())*/.setSearchType(SearchType
+//                            .QUERY_AND_FETCH);
+//
+//                    Map<String, String>qf = cmd.getQueryFields();
+//
+//                    if (qf != null) {
+//                        for (String field : qf.keySet()) {
+//                            TermQueryBuilder tqb = QueryBuilders.termQuery(field, qf.get(field));
+//
+//                            srb = srb.setQuery(tqb);
+//                        }
+//                    }
+
+                    srb = srb.setFrom(0).setSize(1000);
+
+                    log.info("srb: " + srb);
+
+                    SearchResponse sr = srb.get();
+
+                    log.info("search response: " +sr.status().name() + " - " + sr.status().getStatus() );
+
+                    SearchHit[] hits = sr.getHits().hits();
+
+                    StringBuffer results = new StringBuffer("Number of hits: ").append(hits.length).append('\n');
+
+                    for (SearchHit hit : hits) {
+                        results.append(hit.getSourceAsString()).append('\n');
+                    }
+
+                    log.info("Results: " + results.toString());
+
+                    getSender().tell(results.toString(), getSelf());
                     break;
 
             }
-
-            this.getSender().tell("Results: " + status, this.getSelf());
         } // if (message instanceof EsCmd) {
         else if (message instanceof ReceiveTimeout) {
             ReceiveTimeout rt = (ReceiveTimeout)message;
@@ -212,9 +270,15 @@ public class EsStorage extends UntypedActor {
         public SupervisorStrategy.Directive apply(Throwable throwable) throws Exception {
 
             if (throwable instanceof UnknownHostException) {
+
+                throwable.printStackTrace();
+
                 SupervisorStrategy.stop();
             }
             if (throwable instanceof ElasticsearchException) {
+
+                throwable.printStackTrace();
+
                 return SupervisorStrategy.stop();
             }
             else {

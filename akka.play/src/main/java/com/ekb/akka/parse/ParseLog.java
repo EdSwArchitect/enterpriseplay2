@@ -38,6 +38,7 @@ public class ParseLog extends UntypedActor {
     /**
      * If a string, assume it's log record and attempt to parse if. If parsed, send to the next actor.
      * If a file, assume it's a file of log records. Read the file parse it, and send the next actor
+     *
      * @param msg
      * @throws Throwable
      */
@@ -48,11 +49,11 @@ public class ParseLog extends UntypedActor {
         if (msg instanceof String) {
             log.info("Received a string. assuming it's a log record");
             parser.setBulk(false);
-            parseIt(parser, (String)msg, false);
+            parseIt(parser, (String) msg, false);
         } // if (msg instanceof String) {
         else if (msg instanceof File) {
             log.info("Received a File class message");
-            File dataFile = (File)msg;
+            File dataFile = (File) msg;
 
             FileInputStream fis = new FileInputStream(dataFile);
             InputStreamReader isr = new InputStreamReader(fis);
@@ -74,9 +75,10 @@ public class ParseLog extends UntypedActor {
 
     /**
      * Parse the record
+     *
      * @param parser The parser
      * @param record the log record
-     * @param bulk if true, make it a bulk insert, otherwise it's an insert
+     * @param bulk   if true, make it a bulk insert, otherwise it's an insert
      */
     private void parseIt(RouterParser parser, String record, boolean bulk) {
         if (parser.parse(record)) {
