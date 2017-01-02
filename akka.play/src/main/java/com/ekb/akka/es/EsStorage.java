@@ -231,8 +231,7 @@ public class EsStorage extends UntypedActor {
                         results.append(hit.getSourceAsString()).append('\n');
                     }
 
-                    log.info("Results: " + results.toString());
-
+                    // give the results back to the sender
                     getSender().tell(results.toString(), getSelf());
                     break;
 
