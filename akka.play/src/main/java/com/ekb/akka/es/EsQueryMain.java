@@ -18,15 +18,19 @@ public class EsQueryMain {
         System.out.println("Startup");
         ActorSystem system = ActorSystem.create("EsPlay");
 
-        ActorRef storage = system.actorOf(Props.create(EsStorage.class), "ES_Storage");
+        ActorRef replier = system.actorOf(Props.create(ReplyHandler.class),"Replay_Handler");
 
-        EsStorage.EsCmd cmd = new EsStorage.EsCmd(EsStorage.ES_COMMAND.QUERY, "router", "log", "");
+        replier.tell(new Integer(53), ActorRef.noSender());
 
-        HashMap<String, String>map = new HashMap<String, String>();
-        map.put("level", "err");
-        cmd.setQueryFields(map);
-
-        storage.tell(cmd, ActorRef.noSender());
+//        ActorRef storage = system.actorOf(Props.create(EsStorage.class), "ES_Storage");
+//
+//        EsStorage.EsCmd cmd = new EsStorage.EsCmd(EsStorage.ES_COMMAND.QUERY, "router", "log", "");
+//
+//        HashMap<String, String>map = new HashMap<String, String>();
+//        map.put("level", "err");
+//        cmd.setQueryFields(map);
+//
+//        storage.tell(cmd, ActorRef.noSender());
 
         try {
             TimeUnit.MINUTES.sleep(3);
