@@ -12,7 +12,7 @@ import java.net.SocketAddress;
 /**
  * Created by EdwinBrown on 1/3/2017.
  */
-public class NetworkingTest {
+public class ClientNetworkingTest {
     public static void main(String... args) {
         try {
             String fileName;
@@ -24,7 +24,7 @@ public class NetworkingTest {
                 fileName = "akka.play/src/test/resources/SystemLog.txt";
             }
 
-            Socket socket = new Socket("localhost", 5555);
+            Socket socket = new Socket("localhost", 8555);
 
             PrintStream out = new PrintStream(socket.getOutputStream());
 
