@@ -2,6 +2,8 @@ package com.ekb.akka.networking;
 
 import akka.actor.ActorRef;
 import akka.actor.UntypedActor;
+import akka.event.Logging;
+import akka.event.LoggingAdapter;
 import akka.io.Udp;
 import akka.io.UdpMessage;
 import akka.japi.Procedure;
@@ -13,6 +15,8 @@ import java.net.InetSocketAddress;
  * Created by EdwinBrown on 1/2/2017.
  */
 public class SimpleSender extends UntypedActor {
+    /** logger */
+    private final LoggingAdapter log = Logging.getLogger(context().system(), this);
 
     final InetSocketAddress remote;
 
