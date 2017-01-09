@@ -17,9 +17,12 @@ public class SimplisticHandler extends UntypedActor{
     @Override
     public void onReceive(Object msg) throws Throwable {
         if (msg instanceof Tcp.Received) {
-            final ByteString data = ((Tcp.Received) msg).data();
+            Tcp.Received tcpReceived = (Tcp.Received)msg;
 
-            log.info("data: " + data);
+            final ByteString data = tcpReceived.data();
+
+            log.info("data: " + data.utf8String());
+            log.info("Sender is: " + getSender().path());
 
             getSender().tell(TcpMessage.write(data), getSelf());
 
