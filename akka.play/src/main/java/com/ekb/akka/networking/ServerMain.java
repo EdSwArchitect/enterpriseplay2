@@ -14,7 +14,11 @@ public class ServerMain {
     public static void main(String... args) {
         try {
             ActorSystem system = ActorSystem.create("EdNetworking");
+            ActorRef output = system.actorOf(Props.create(OutputActor.class), "Output");
             ActorRef serverMgr = system.actorOf(Props.create(ServerMgr.class), "EdServer");
+            ActorRef outputActor = system.actorOf(Props.create(Buffering.class), "Buffering");
+
+
 
             TimeUnit.MINUTES.sleep(3L);
 

@@ -8,8 +8,7 @@ import akka.event.LoggingAdapter;
 import akka.io.Tcp;
 
 /**
- * AKKA actor class to access Elastic Search. I'm just learning stuff.
- * Created by EdwinBrown on 12/22/2016.
+ * AKKA actor class to access network stuff. I'm just learning stuff.
  */
 public class ServerMgr extends UntypedActor {
     /** logger */
