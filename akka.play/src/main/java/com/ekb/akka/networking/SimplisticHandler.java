@@ -1,5 +1,7 @@
 package com.ekb.akka.networking;
 
+import akka.actor.ActorRef;
+import akka.actor.Props;
 import akka.actor.UntypedActor;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
@@ -18,13 +20,16 @@ public class SimplisticHandler extends UntypedActor{
     /** logger */
     private final LoggingAdapter log = Logging.getLogger(context().system(), this);
     /** byte buffer */
-    private ByteArrayOutputStream baos;
+//    private ByteArrayOutputStream baos;
+
+    private ActorRef buffering;
 
     /**
      * Constructor
      */
     public SimplisticHandler() {
-        baos = new ByteArrayOutputStream();
+//        baos = new ByteArrayOutputStream();
+        buffering = context().actorOf(Props.create(Buffering.class), "Buffer");
     }
 
     /**
@@ -39,8 +44,10 @@ public class SimplisticHandler extends UntypedActor{
 
             final ByteString data = tcpReceived.data();
 
-            log.info("data: " + data.utf8String());
-            log.info("Sender is: " + getSender().path());
+//            log.info("data: " + data.utf8String());
+//            log.info("Sender is: " + getSender().path());
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
             ByteIterator bi = data.iterator();
 
@@ -48,8 +55,10 @@ public class SimplisticHandler extends UntypedActor{
                 baos.write(bi.next());
             } // while (bi.hasNext()) {
 
+            log.info("SimplisticHandler::sender() " + getSender().path());
 
-            getSender().tell(TcpMessage.write(data), getSelf());
+            //getSender().tell(TcpMessage.write(data), getSelf());
+            buffering.tell(baos, getSelf());
 
         } // if (msg instanceof Tcp.Received) {
         else if (msg instanceof Tcp.ConnectionClosed) {

@@ -32,6 +32,7 @@ public class Server extends UntypedActor {
      * @return
      */
     public static Props props(ActorRef manager) {
+
         return Props.create(Server.class, manager);
     }
 
@@ -73,7 +74,7 @@ public class Server extends UntypedActor {
             manager.tell(conn, getSelf());
 
             final ActorRef handler = getContext().actorOf(
-                    Props.create(SimplisticHandler.class));
+                    Props.create(SimplisticHandler.class), "SimplisticHandler");
 
             getSender().tell(TcpMessage.register(handler), getSelf());
         }
