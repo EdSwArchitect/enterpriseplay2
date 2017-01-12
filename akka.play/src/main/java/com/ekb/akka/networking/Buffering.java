@@ -8,13 +8,10 @@ import akka.event.LoggingAdapter;
 import akka.util.ByteIterator;
 import akka.util.ByteString;
 import scala.concurrent.Await;
-import scala.concurrent.CanAwait;
 import scala.concurrent.Future;
 import scala.concurrent.duration.Duration;
-import scala.concurrent.duration.FiniteDuration;
 
 import java.io.ByteArrayOutputStream;
-import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;

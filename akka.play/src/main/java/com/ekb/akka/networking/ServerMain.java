@@ -3,7 +3,6 @@ package com.ekb.akka.networking;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
-import com.ekb.akka.es.EsStorage;
 
 import java.util.concurrent.TimeUnit;
 

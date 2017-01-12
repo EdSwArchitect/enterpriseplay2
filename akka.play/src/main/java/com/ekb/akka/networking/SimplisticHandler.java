@@ -6,12 +6,10 @@ import akka.actor.UntypedActor;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
 import akka.io.Tcp;
-import akka.io.TcpMessage;
 import akka.util.ByteIterator;
 import akka.util.ByteString;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 
 /**
  * Created by EdwinBrown on 1/2/2017.
