@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="akka.play_main" target="1.8" />
+      <module name="akka.play_test" target="1.8" />
+      <module name="kafka_main" target="1.7" />
+      <module name="kafka_test" target="1.7" />
+      <module name="spring-int_main" target="1.8" />
+      <module name="spring-int_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
