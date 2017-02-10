@@ -19,13 +19,17 @@ public class SyslogUdp extends UntypedActor {
 
     /** logger */
     private final LoggingAdapter log = Logging.getLogger(context().system(), this);
+    /** next in line */
+    private ActorRef nextActor;
 
     /**
      * Constructor
      * @param port The port it attempts to bind to to listen
      */
-    public SyslogUdp(int port) {
-        log.info("Attempting to listen to port: " + port);
+    public SyslogUdp(int port, ActorRef nextActor) {
+        this.nextActor = nextActor;
+
+        log.info("Attempting to listen to port: " + port + " with actor: " + nextActor);
 
         final ActorRef mgr = Udp.get(getContext().system()).getManager();
 
@@ -37,9 +41,9 @@ public class SyslogUdp extends UntypedActor {
      * @param port
      * @return
      */
-    public static Props props(int port) {
+    public static Props props(int port, ActorRef nextActor) {
 
-        return Props.create(UdpServer.class, port);
+        return Props.create(UdpServer.class, port, nextActor);
     }
 
 
@@ -51,7 +55,7 @@ public class SyslogUdp extends UntypedActor {
      */
     @Override
     public void onReceive(Object message) throws Throwable {
-        log.info("Message received: " + message);
+//        log.info("Message received: " + message);
 
         if (message instanceof Udp.Bound) {
             final Udp.Bound bound = (Udp.Bound)message;
@@ -74,11 +78,17 @@ public class SyslogUdp extends UntypedActor {
             @Override
             public void apply(Object msg) throws Exception {
                 if (msg instanceof Udp.Received) {
-                    log.info("Received data");
+//                    log.info("Received data");
 
                     Udp.Received received = (Udp.Received)msg;
 
+                    String utf8 = received.data().utf8String();
+//                    log.info(utf8);
+
                     // process data here
+                    if (nextActor != null) {
+                        nextActor.tell(utf8, getSelf());
+                    }
 
                 } // if (msg instanceof Udp.Received) {
                 else if (msg.equals(UdpMessage.unbind())) {
