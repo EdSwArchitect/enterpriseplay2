@@ -5,6 +5,7 @@ import akka.actor.ActorSystem;
 import akka.actor.Props;
 import com.ekb.cyber.networking.debugging.Debugger;
 import com.ekb.cyber.networking.filters.ContainsFilter;
+import com.ekb.cyber.networking.parsers.AuthenticationParser;
 import com.ekb.cyber.networking.udp.SyslogUdp;
 
 import java.util.concurrent.TimeUnit;
@@ -28,7 +29,8 @@ public class UdpMain {
             ActorSystem system = ActorSystem.create("UdpNetwork");
 
             ActorRef debugger = system.actorOf(Props.create(Debugger.class), "OutputDebugger");
-            ActorRef filter = system.actorOf(Props.create(ContainsFilter.class, "LogonType", debugger), "Filter");
+            ActorRef parser = system.actorOf(Props.create(AuthenticationParser.class, debugger), "Parser");
+            ActorRef filter = system.actorOf(Props.create(ContainsFilter.class, "LogonType", parser), "Filter");
             ActorRef syslogUdp = system.actorOf(Props.create(SyslogUdp.class, port, filter), "SyslogUdp");
 
             TimeUnit.MINUTES.sleep(5L);
