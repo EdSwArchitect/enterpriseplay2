@@ -12,6 +12,18 @@
             <option value="$PROJECT_DIR$" />
           </set>
         </option>
+        <option name="useAutoImport" value="true" />
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="LOCAL" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/OtherStuff" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../APPS/gradle-2.14.1" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/OtherStuff" />
+          </set>
+        </option>
+        <option name="useAutoImport" value="true" />
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
@@ -22,6 +34,7 @@
             <option value="$PROJECT_DIR$/akka.play" />
           </set>
         </option>
+        <option name="useAutoImport" value="true" />
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
@@ -32,16 +45,7 @@
             <option value="$PROJECT_DIR$/kafka" />
           </set>
         </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="distributionType" value="LOCAL" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/spring-int" />
-        <option name="gradleHome" value="$PROJECT_DIR$/../../APPS/gradle-2.14.1" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/spring-int" />
-          </set>
-        </option>
+        <option name="useAutoImport" value="true" />
       </GradleProjectSettings>
     </option>
   </component>

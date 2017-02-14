@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/OtherStuff.iml" filepath="$PROJECT_DIR$/.idea/modules/OtherStuff.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/akka.play.iml" filepath="$PROJECT_DIR$/.idea/modules/akka.play.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/akka.play_main.iml" filepath="$PROJECT_DIR$/.idea/modules/akka.play_main.iml" group="akka.play" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/akka.play_test.iml" filepath="$PROJECT_DIR$/.idea/modules/akka.play_test.iml" group="akka.play" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/enterpriseplay2.iml" filepath="$PROJECT_DIR$/.idea/modules/enterpriseplay2.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/kafka.iml" filepath="$PROJECT_DIR$/.idea/modules/kafka.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spring-int.iml" filepath="$PROJECT_DIR$/.idea/modules/spring-int.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kafka_main.iml" filepath="$PROJECT_DIR$/.idea/modules/kafka_main.iml" group="kafka" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kafka_test.iml" filepath="$PROJECT_DIR$/.idea/modules/kafka_test.iml" group="kafka" />
     </modules>
   </component>
 </project>
