@@ -4,6 +4,8 @@
     <bytecodeTargetLevel>
       <module name="akka.play_main" target="1.8" />
       <module name="akka.play_test" target="1.8" />
+      <module name="flink.play_main" target="1.5" />
+      <module name="flink.play_test" target="1.5" />
       <module name="kafka_main" target="1.7" />
       <module name="kafka_test" target="1.7" />
     </bytecodeTargetLevel>

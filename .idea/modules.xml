@@ -7,9 +7,13 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/akka.play_main.iml" filepath="$PROJECT_DIR$/.idea/modules/akka.play_main.iml" group="akka.play" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/akka.play_test.iml" filepath="$PROJECT_DIR$/.idea/modules/akka.play_test.iml" group="akka.play" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/enterpriseplay2.iml" filepath="$PROJECT_DIR$/.idea/modules/enterpriseplay2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/flink.play/flink.play.iml" filepath="$PROJECT_DIR$/.idea/modules/flink.play/flink.play.iml" group="flink.play" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/flink.play/flink.play_main.iml" filepath="$PROJECT_DIR$/.idea/modules/flink.play/flink.play_main.iml" group="flink.play" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/flink.play/flink.play_test.iml" filepath="$PROJECT_DIR$/.idea/modules/flink.play/flink.play_test.iml" group="flink.play" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/kafka.iml" filepath="$PROJECT_DIR$/.idea/modules/kafka.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/kafka_main.iml" filepath="$PROJECT_DIR$/.idea/modules/kafka_main.iml" group="kafka" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/kafka_test.iml" filepath="$PROJECT_DIR$/.idea/modules/kafka_test.iml" group="kafka" />
+      <module fileurl="file://$PROJECT_DIR$/scala.play/scala.play.iml" filepath="$PROJECT_DIR$/scala.play/scala.play.iml" />
     </modules>
   </component>
 </project>
