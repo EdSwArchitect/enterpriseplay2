@@ -1,0 +1,25 @@
+<project name="AkkaProject" threads="1" pubsub="auto">
+  <contqueries>
+    <contquery name="Authentication_Query">
+      <windows>
+        <window-source name="Authentication" index="pi_EMPTY" pubsub-index="pi_EMPTY" insert-only="true">
+          <schema>
+            <fields>
+              <field name="authId" type="string" key="true"/>
+              <field name="syslogDate" type="string"/>
+              <field name="serverName" type="string"/>
+              <field name="loginDate" type="string"/>
+              <field name="user" type="string"/>
+              <field name="ipAddress" type="string"/>
+            </fields>
+          </schema>
+        </window-source>
+		<window-copy name="AuthenticationOutput" index="pi_EMPTY" output-insert-only="true">
+		</window-copy>
+		</windows>
+      <edges>
+        <edge source="Authentication" target="AuthenticationOutput"/>
+      </edges>
+    </contquery>
+  </contqueries>
+</project>
