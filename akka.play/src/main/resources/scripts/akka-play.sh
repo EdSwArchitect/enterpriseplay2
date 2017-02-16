@@ -26,4 +26,4 @@ addToClasspath ./libs
 
 #echo $CLASSPATH
 
-java -cp "$CLASSPATH" com.ekb.cyber.networking.UdpMain $*
+java -cp "$CLASSPATH" com.ekb.cyber.networking.SyslogAuthMain $*

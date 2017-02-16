@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by ebrown on 2/9/2017.
  */
-public class UdpMain {
+public class SyslogAuthMain {
     /**
      *
      * @param args

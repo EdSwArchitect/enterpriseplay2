@@ -32,6 +32,7 @@ public class EspPublisher extends UntypedActor {
         log.info("Saving URL '" + espUri + "'");
         this.espUri = espUri;
     }
+
     /**
      * logger
      */
@@ -133,7 +134,6 @@ public class EspPublisher extends UntypedActor {
 				// Create event block.
                 if (!clientHandler.publisherInject(client, eb)) {
                     throw new RuntimeException("publisherInject failed.");
-
                 }
 
                 events.clear();
