@@ -34,7 +34,7 @@ public class WebProxyParser extends UntypedActor {
      * Constructor
      */
     public WebProxyParser() {
-
+        log.debug("WebProxyParser created without a next actor");
     }
     /**
      *
@@ -42,6 +42,7 @@ public class WebProxyParser extends UntypedActor {
      */
     public WebProxyParser(ActorRef nextActor) {
         this.nextActor = nextActor;
+        log.debug("WebProxyParser created with a next actor: " + nextActor);
     }
 
     /**
@@ -51,7 +52,7 @@ public class WebProxyParser extends UntypedActor {
      */
     @Override
     public void onReceive(Object message) throws Throwable {
-        log.info("Message received: >>" + message + "<<");
+        log.debug("Message received: >>" + message + "<<");
 
         if (message instanceof String) {
             String record = (String) message;

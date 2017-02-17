@@ -21,6 +21,7 @@ public class SyslogHandler extends UntypedActor{
      * Constructor
      */
     public SyslogHandler() {
+        log.info("Handler created, no next actor");
     }
 
     /**
@@ -29,6 +30,7 @@ public class SyslogHandler extends UntypedActor{
      */
     public SyslogHandler(ActorRef nextActor) {
         this.nextActor = nextActor;
+        log.info("Handler created with next actor: " + nextActor);
     }
 
     /**
@@ -40,6 +42,9 @@ public class SyslogHandler extends UntypedActor{
     @Override
     public void onReceive(Object msg) throws Throwable {
         if (msg instanceof Tcp.Received) {
+
+            log.debug("Tcp.Receved got data");
+
             Tcp.Received tcpReceived = (Tcp.Received)msg;
 
             final ByteString data = tcpReceived.data();
