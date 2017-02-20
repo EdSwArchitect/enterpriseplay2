@@ -73,6 +73,8 @@ public class SyslogWebProxyApplication extends UntypedActor {
         if (message instanceof COMMAND) {
             COMMAND whatToDo = (COMMAND)message;
 
+            log.info("****** COMMAND *****: " + whatToDo);
+
             switch(whatToDo) {
                 case START:
                     debugger = context().actorOf(Props.create(Debugger.class), "OutputDebugger");
@@ -89,7 +91,6 @@ public class SyslogWebProxyApplication extends UntypedActor {
                     break;
                 case STOP:
                     stopTheKids();
-                    log.info("Command: " + whatToDo + " is not implemented");
                     break;
                 case METRICS:
                     log.info("Command: " + whatToDo + " is not implemented");

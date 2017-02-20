@@ -54,8 +54,11 @@ public class SyslogAuthApplication extends UntypedActor {
 
     @Override
     public void onReceive(Object message) throws Throwable {
-        if (message instanceof SyslogWebProxyApplication.COMMAND) {
-            SyslogWebProxyApplication.COMMAND whatToDo = (SyslogWebProxyApplication.COMMAND) message;
+        if (message instanceof SyslogAuthApplication.COMMAND) {
+
+            SyslogAuthApplication.COMMAND whatToDo = (SyslogAuthApplication.COMMAND) message;
+
+            log.info("****** COMMAND *****: " + whatToDo);
 
             switch (whatToDo) {
                 case START:
@@ -73,7 +76,6 @@ public class SyslogAuthApplication extends UntypedActor {
                     break;
                 case STOP:
                     stopTheKids();
-                    log.info("Command: " + whatToDo + " is not implemented");
                     break;
                 case METRICS:
                     log.info("Command: " + whatToDo + " is not implemented");

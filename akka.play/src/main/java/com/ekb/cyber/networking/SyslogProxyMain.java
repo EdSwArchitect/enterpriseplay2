@@ -3,6 +3,7 @@ package com.ekb.cyber.networking;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
+import akka.event.LoggingAdapter;
 import com.ekb.SyslogWebProxyApplication;
 
 import java.net.InetAddress;
@@ -36,13 +37,15 @@ public class SyslogProxyMain {
 
             ActorSystem system = ActorSystem.create("TcpNetwork");
 
-            system.log().info("Hostname: " + hostName);
-            system.log().info("Port: " + port);
-            system.log().info("espUri: " + espUri);
+            LoggingAdapter log = system.log();
+
+            log.info("Hostname: " + hostName);
+            log.info("Port: " + port);
+            log.info("espUri: " + espUri);
 
             ActorRef webProxy = system.actorOf(Props.create(SyslogWebProxyApplication.class, hostName, port), "WebProxy");
 
-            system.log().info("Starting the web proxy application...");
+            log.info("Starting the web proxy application...");
 
 
             webProxy.tell(SyslogWebProxyApplication.COMMAND.START, null);
@@ -58,6 +61,12 @@ public class SyslogProxyMain {
             // zz-ed-vm01.dev.cyber.sas.com:9080/SASESP
 
             TimeUnit.MINUTES.sleep(5L);
+
+            webProxy.tell(SyslogWebProxyApplication.COMMAND.STOP, null);
+
+            log.info("Waiting 2 minutes to terminate");
+
+            TimeUnit.MINUTES.sleep(2L);
 
             system.terminate();
         }
