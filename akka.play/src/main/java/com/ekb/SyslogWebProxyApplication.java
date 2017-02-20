@@ -7,6 +7,7 @@ import com.ekb.cyber.networking.debugging.Debugger;
 import com.ekb.cyber.networking.parsers.WebProxyParser;
 import com.ekb.cyber.networking.tcp.Buffering;
 import com.ekb.cyber.networking.tcp.SyslogTcp;
+import com.ekb.esp.WebProxyEspPublisher;
 
 /**
  * The Syslog application for WebProxy. This is the parent actor that creates children to handle the processing.
@@ -25,6 +26,8 @@ public class SyslogWebProxyApplication extends UntypedActor {
     private String hostName;
     /** port */
     private int port;
+    /** esp URI */
+    private String espUri;
 
     /** debugging only */
     private ActorRef debugger;
@@ -34,15 +37,18 @@ public class SyslogWebProxyApplication extends UntypedActor {
     ActorRef buffer;
     /** networking */
     ActorRef syslogUdp;
+    /** esp */
+    ActorRef proxyEsp;
 
     /**
      *
      * @param hostName
      * @param port
      */
-    public SyslogWebProxyApplication(String hostName, int port) {
+    public SyslogWebProxyApplication(String hostName, int port, String espUri) {
         this.hostName = hostName;
         this.port = port;
+        this.espUri = espUri;
     }
 
     /**
@@ -79,7 +85,9 @@ public class SyslogWebProxyApplication extends UntypedActor {
                 case START:
                     debugger = context().actorOf(Props.create(Debugger.class), "OutputDebugger");
 
-                    parser = context().actorOf(Props.create(WebProxyParser.class, debugger), "WebProxyParser");
+                    proxyEsp = context().actorOf(Props.create(WebProxyEspPublisher.class, espUri), "WebProxyESP");
+
+                    parser = context().actorOf(Props.create(WebProxyParser.class, proxyEsp), "WebProxyParser");
 
                     buffer = context().actorOf(Props.create(Buffering.class, parser), "Buffering");
 

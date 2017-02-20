@@ -1,25 +1,50 @@
 <project name="AkkaProject" threads="1" pubsub="auto">
-  <contqueries>
-    <contquery name="Authentication_Query">
-      <windows>
-        <window-source name="Authentication" index="pi_EMPTY" pubsub-index="pi_EMPTY" insert-only="true">
-          <schema>
-            <fields>
-              <field name="authId" type="string" key="true"/>
-              <field name="syslogDate" type="string"/>
-              <field name="serverName" type="string"/>
-              <field name="loginDate" type="string"/>
-              <field name="user" type="string"/>
-              <field name="ipAddress" type="string"/>
-            </fields>
-          </schema>
-        </window-source>
-		<window-copy name="AuthenticationOutput" index="pi_EMPTY" output-insert-only="true">
-		</window-copy>
-		</windows>
-      <edges>
-        <edge source="Authentication" target="AuthenticationOutput"/>
-      </edges>
-    </contquery>
-  </contqueries>
+    <contqueries>
+        <contquery name="Authentication_Query">
+            <windows>
+                <window-source name="Authentication" index="pi_EMPTY" pubsub-index="pi_EMPTY" insert-only="true">
+                    <schema>
+                        <fields>
+                            <field name="authId" type="string" key="true"/>
+                            <field name="syslogDate" type="string"/>
+                            <field name="serverName" type="string"/>
+                            <field name="loginDate" type="string"/>
+                            <field name="user" type="string"/>
+                            <field name="ipAddress" type="string"/>
+                        </fields>
+                    </schema>
+                </window-source>
+                <window-copy name="AuthenticationOutput" index="pi_EMPTY" output-insert-only="true">
+                </window-copy>
+            </windows>
+            <edges>
+                <edge source="Authentication" target="AuthenticationOutput"/>
+            </edges>
+        </contquery>
+        <contquery name="WebProxyIngest_Query">
+            <windows>
+                <window-source name="WebProxy" index="pi_EMPTY" pubsub-index="pi_EMPTY" insert-only="true">
+                    <schema>
+                        <fields>
+                            <field name="proxyId" type="string" key="true"/>
+                            <field name="action" type="string"/>
+                            <field name="reason" type="string"/>
+                            <field name="protocol" type="string"/>
+                            <field name="serverip" type="string"/>
+                            <field name="requestmethod" type="string"/>
+                            <field name="user" type="string"/>
+                            <field name="hostname" type="string"/>
+                            <field name="clientpublicIP" type="string"/>
+                            <field name="refererURL" type="string"/>
+                        </fields>
+                    </schema>
+                </window-source>
+                <window-copy name="WebProxyOutput" index="pi_EMPTY" output-insert-only="true">
+                </window-copy>
+                <edges>
+                    <edge source="WebProxy" target="WebProxyOutput"/>
+                </edges>
+            </windows>
+        </contquery>
+    </contqueries>
 </project>
