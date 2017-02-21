@@ -8,7 +8,7 @@ import akka.event.LoggingAdapter;
 import com.ekb.cyber.networking.filters.ContainsFilter;
 import com.ekb.cyber.networking.parsers.AuthenticationParser;
 import com.ekb.cyber.networking.udp.SyslogUdp;
-import com.ekb.esp.EspPublisher;
+import com.ekb.esp.AuthEspPublisher;
 
 /**
  * Created by ebrown on 2/17/2017.
@@ -40,7 +40,7 @@ public class SyslogAuthApplication extends UntypedActor {
      */
     private String espUri;
 
-    ActorRef esp; // = system.actorOf(Props.create(EspPublisher.class, espUri), "ESP");
+    ActorRef esp; // = system.actorOf(Props.create(AuthEspPublisher.class, espUri), "ESP");
     ActorRef parser; // = system.actorOf(Props.create(AuthenticationParser.class, esp), "Parser");
     ActorRef filter; // = system.actorOf(Props.create(ContainsFilter.class, "LogonType", parser), "Filter");
     ActorRef syslogUdp; // = system.actorOf(Props.create(SyslogUdp.class, port, filter), "SyslogUdp");
@@ -62,7 +62,7 @@ public class SyslogAuthApplication extends UntypedActor {
 
             switch (whatToDo) {
                 case START:
-                    esp = context().actorOf(Props.create(EspPublisher.class, espUri), "ESP");
+                    esp = context().actorOf(Props.create(AuthEspPublisher.class, espUri), "ESP");
 
                     parser = context().actorOf(Props.create(AuthenticationParser.class, esp), "Parser");
 

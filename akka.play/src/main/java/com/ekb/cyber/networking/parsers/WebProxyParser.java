@@ -21,12 +21,21 @@ public class WebProxyParser extends UntypedActor {
     private ActorRef nextActor;
 
     /** pattern for parsing web proxy logs */
-    private final Pattern pat = Pattern.compile("(\\d{4}\\-\\d{2}\\-\\d{2} \\d{2}:\\d{2}:\\d{2})\\s+reason=(\\w+)\\s+event_id=(\\d+)\\s+protocol=(\\w+)\\s+action=(\\w+)\\s+transactionsize=(\\d+)" +
-            "\\s+responsesize=(\\d+)\\s+requestsize=(\\d+)\\s+urlcategory=(.+)\\s+serverip=([\\d\\.]+)\\s" +
-            "clienttranstime=(\\d+)\\s+requestmethod=(\\w+)\\s+refererURL=(.+)useragent=(.*)product=(\\w+)\\s+" +
-            "location=(.+)ClientIP=([\\d\\.]+)\\s+status=(.+)user=(.+)url=(.+)vendor=([\\w\\d]+)" +
-            "\\s+hostname=(.+)clientpublicIP=([\\d\\.]+)\\s+threatcategory=(.+)threatname=(\\w+)\\s+" +
-            "filetype=([\\w\\d]+)\\s+appname=(.+)pagerisk=(.+)department=(.+)urlsupercategory=(.+)" +
+//    private final Pattern pat = Pattern.compile("(\\d{4}\\-\\d{2}\\-\\d{2} \\d{2}:\\d{2}:\\d{2})\\s+reason=(\\w+)\\s+event_id=(\\d+)\\s+protocol=(\\w+)\\s+action=(\\w+)\\s+transactionsize=(\\d+)" +
+//            "\\s+responsesize=(\\d+)\\s+requestsize=(\\d+)\\s+urlcategory=(.+)\\s+serverip=([\\d\\.]+)\\s" +
+//            "clienttranstime=(\\d+)\\s+requestmethod=(\\w+)\\s+refererURL=(.+)useragent=(.*)product=(\\w+)\\s+" +
+//            "location=(.+)ClientIP=([\\d\\.]+)\\s+status=(.+)user=(.+)url=(.+)vendor=([\\w\\d]+)" +
+//            "\\s+hostname=(.+)clientpublicIP=([\\d\\.]+)\\s+threatcategory=(.+)threatname=(\\w+)\\s+" +
+//            "filetype=([\\w\\d]+)\\s+appname=(.+)pagerisk=(.+)department=(.+)urlsupercategory=(.+)" +
+//            "appclass=(.+)dlpengine=(.+)urlclass=(.+)threatclass=(.+)dlpdictionaries=(.+)fileclass=(.+)" +
+//            "bwthrottle=(.+)servertranstime=(.*)");
+
+    private final Pattern pat = Pattern.compile("(\\d{4}\\-\\d{2}\\-\\d{2} \\d{2}:\\d{2}:\\d{2})\\s+reason=(.+)event_id=(.+)protocol=(.+)action=(.+)transactionsize=(.+)" +
+            "responsesize=(.+)requestsize=(.+)urlcategory=(.+)\\s+serverip=(.+)" +
+            "clienttranstime=(.+)requestmethod=(.+)refererURL=(.+)useragent=(.*)product=(.+)" +
+            "location=(.+)ClientIP=([\\d\\.]+)\\s+status=(.+)user=(.+)url=(.+)vendor=(.+)" +
+            "hostname=(.+)clientpublicIP=([\\d\\.]+)\\s+threatcategory=(.+)threatname=(.+)" +
+            "filetype=(.+)appname=(.+)pagerisk=(.+)department=(.+)urlsupercategory=(.+)" +
             "appclass=(.+)dlpengine=(.+)urlclass=(.+)threatclass=(.+)dlpdictionaries=(.+)fileclass=(.+)" +
             "bwthrottle=(.+)servertranstime=(.*)");
 

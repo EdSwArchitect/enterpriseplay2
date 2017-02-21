@@ -41,10 +41,10 @@
                 </window-source>
                 <window-copy name="WebProxyOutput" index="pi_EMPTY" output-insert-only="true">
                 </window-copy>
-                <edges>
-                    <edge source="WebProxy" target="WebProxyOutput"/>
-                </edges>
             </windows>
+            <edges>
+                <edge source="WebProxy" target="WebProxyOutput"/>
+            </edges>
         </contquery>
     </contqueries>
 </project>

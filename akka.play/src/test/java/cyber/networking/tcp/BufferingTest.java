@@ -78,8 +78,6 @@ public class BufferingTest {
 
             System.out.println("\n\nPreSynch: '" + preSynch + "'");
             System.out.println("Leftover: '" + buffer.toString() + "'");
-
-
         } catch (FileNotFoundException e) {
 
             StringWriter sw = new StringWriter();

@@ -20,7 +20,7 @@ import java.util.logging.Level;
  *
  *
  */
-public class EspPublisher extends UntypedActor {
+public class AuthEspPublisher extends UntypedActor {
     private final static long BLOCK_SIZE = 1000;
     private String espUri;
     private dfESPclientHandler clientHandler;
@@ -28,7 +28,7 @@ public class EspPublisher extends UntypedActor {
     private dfESPschema schema;
     private ArrayList<dfESPevent>events;
 
-    public EspPublisher(String espUri) {
+    public AuthEspPublisher(String espUri) {
         log.info("Saving URL '" + espUri + "'");
         this.espUri = espUri;
     }

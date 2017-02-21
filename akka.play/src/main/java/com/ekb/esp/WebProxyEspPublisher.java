@@ -5,12 +5,14 @@ import akka.event.Logging;
 import akka.event.LoggingAdapter;
 import com.sas.esp.api.pubsub.dfESPclient;
 import com.sas.esp.api.pubsub.dfESPclientHandler;
-import com.sas.esp.api.server.ReferenceIMPL.*;
+import com.sas.esp.api.server.ReferenceIMPL.dfESPdvString;
+import com.sas.esp.api.server.ReferenceIMPL.dfESPevent;
+import com.sas.esp.api.server.ReferenceIMPL.dfESPeventblock;
+import com.sas.esp.api.server.ReferenceIMPL.dfESPschema;
 import com.sas.esp.api.server.datavar;
 import com.sas.esp.api.server.eventblock;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -118,7 +120,7 @@ public class WebProxyEspPublisher extends UntypedActor {
             ArrayList<datavar> data = new ArrayList<datavar>();
 
             data.add(new dfESPdvString(UUID.randomUUID().toString()));
-            data.add(new dfESPdvTimeStamp(new Date((long)parts.get("action"))));
+            data.add(new dfESPdvString((String)parts.get("action")));
             data.add(new dfESPdvString((String)parts.get("reason")));
             data.add(new dfESPdvString((String)parts.get("protocol")));
             data.add(new dfESPdvString((String)parts.get("serverip")));

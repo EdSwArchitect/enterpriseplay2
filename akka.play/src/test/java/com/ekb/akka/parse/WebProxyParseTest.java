@@ -13,13 +13,13 @@ import java.util.regex.Pattern;
 public class WebProxyParseTest {
     final private String WB = "2017-02-16 18:12:28     reason=Allowed  event_id=6387770633353691380    " +
     "protocol=HTTPS  action=Allowed  transactionsize=9951    responsesize=9430       requestsize=521     "+
-            "urlcategory=Corporate Marketing serverip=151.101.32.207 clienttranstime=5       "+
+            "urlcategory=Corporate Marketing serverip=127.101.32.207 clienttranstime=5       "+
             "requestmethod=get       refererURL=erp-sas.icims.com/jobs/search?in_iframe=1&amp;"+
             "hashed=607117230&in_iframe=1&mobile=false&width=1108&height=500&bga=true&needsRedirect=false&jan"+
             "1offset=-300&jun1offset=-240       useragent=Google Chrome (56.x)      product=NSS     "+
-            "location=Port 10066     ClientIP=149.173.8.5    status=200 - OK user=michael.otteni@sas.com     "+
-            "url=js-agent.newrelic.com/nr-1016.min.js    vendor=Zscaler  hostname=js-agent.newrelic.com  "+
-            "clientpublicIP=149.173.8.5      threatcategory=Clean Transaction        threatname=None     "+
+            "location=Port 10066     ClientIP=127.173.8.5    status=200 - OK user=some.user@foo.acme.com     "+
+            "url=js-agent.mygumbo.acme.com/nr-1016.min.js    vendor=Zscaler  hostname=js-agent.mygumbo.acme.com  "+
+            "clientpublicIP=127.173.8.5      threatcategory=Clean Transaction        threatname=None     "+
             "filetype=GZIP   appname=generalbrowsing pagerisk=0      "+
             "department=Framework Testing For Business Intelligence Dept     urlsupercategory=Business and Economy       "+
             "appclass=General Browsing       dlpengine=None  urlclass=Business Use   threatclass=Clean Transaction   "+
@@ -31,16 +31,25 @@ public class WebProxyParseTest {
 
         //useragent=(.*)\+product=(\w+)(.*)
 
-        Pattern pat = Pattern.compile("(\\d{4}\\-\\d{2}\\-\\d{2} \\d{2}:\\d{2}:\\d{2})\\s+reason=(\\w+)\\s+event_id=(\\d+)\\s+protocol=(\\w+)\\s+action=(\\w+)\\s+transactionsize=(\\d+)" +
-                "\\s+responsesize=(\\d+)\\s+requestsize=(\\d+)\\s+urlcategory=(.+)\\s+serverip=([\\d\\.]+)\\s" +
-                "clienttranstime=(\\d+)\\s+requestmethod=(\\w+)\\s+refererURL=(.+)useragent=(.*)product=(\\w+)\\s+" +
-                "location=(.+)ClientIP=([\\d\\.]+)\\s+status=(.+)user=(.+)url=(.+)vendor=([\\w\\d]+)" +
-                "\\s+hostname=(.+)clientpublicIP=([\\d\\.]+)\\s+threatcategory=(.+)threatname=(\\w+)\\s+" +
-                "filetype=([\\w\\d]+)\\s+appname=(.+)pagerisk=(.+)department=(.+)urlsupercategory=(.+)" +
+//        Pattern pat = Pattern.compile("(\\d{4}\\-\\d{2}\\-\\d{2} \\d{2}:\\d{2}:\\d{2})\\s+reason=(\\w+)\\s+event_id=(\\d+)\\s+protocol=(\\w+)\\s+action=(\\w+)\\s+transactionsize=(\\d+)" +
+//                "\\s+responsesize=(\\d+)\\s+requestsize=(\\d+)\\s+urlcategory=(.+)\\s+serverip=([\\d\\.]+)\\s" +
+//                "clienttranstime=(\\d+)\\s+requestmethod=(\\w+)\\s+refererURL=(.+)useragent=(.*)product=(\\w+)\\s+" +
+//                "location=(.+)ClientIP=([\\d\\.]+)\\s+status=(.+)user=(.+)url=(.+)vendor=([\\w\\d]+)" +
+//                "\\s+hostname=(.+)clientpublicIP=([\\d\\.]+)\\s+threatcategory=(.+)threatname=(\\w+)\\s+" +
+//                "filetype=([\\w\\d]+)\\s+appname=(.+)pagerisk=(.+)department=(.+)urlsupercategory=(.+)" +
+//                "appclass=(.+)dlpengine=(.+)urlclass=(.+)threatclass=(.+)dlpdictionaries=(.+)fileclass=(.+)" +
+//                "bwthrottle=(.+)servertranstime=(.*)");
+
+        Pattern pat = Pattern.compile("(\\d{4}\\-\\d{2}\\-\\d{2} \\d{2}:\\d{2}:\\d{2})\\s+reason=(.+)event_id=(.+)protocol=(.+)action=(.+)transactionsize=(.+)" +
+                "responsesize=(.+)requestsize=(.+)urlcategory=(.+)\\s+serverip=(.+)" +
+                "clienttranstime=(.+)requestmethod=(.+)refererURL=(.+)useragent=(.*)product=(.+)" +
+                "location=(.+)ClientIP=([\\d\\.]+)\\s+status=(.+)user=(.+)url=(.+)vendor=(.+)" +
+                "hostname=(.+)clientpublicIP=([\\d\\.]+)\\s+threatcategory=(.+)threatname=(.+)" +
+                "filetype=(.+)appname=(.+)pagerisk=(.+)department=(.+)urlsupercategory=(.+)" +
                 "appclass=(.+)dlpengine=(.+)urlclass=(.+)threatclass=(.+)dlpdictionaries=(.+)fileclass=(.+)" +
                 "bwthrottle=(.+)servertranstime=(.*)");
 
-                //"bwthrottle=(\\w+)\\sservertranstime=(.*)");
+        //"bwthrottle=(\\w+)\\sservertranstime=(.*)");
 
         HashMap<String, String>bits = new HashMap<String, String>();
 

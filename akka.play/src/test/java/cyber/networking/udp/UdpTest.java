@@ -3,8 +3,6 @@ package cyber.networking.udp;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
-import com.ekb.akka.networking.OutputActor;
-import com.ekb.akka.networking.ServerMgr;
 import com.ekb.cyber.networking.udp.SyslogUdp;
 
 import java.util.concurrent.TimeUnit;
@@ -14,6 +12,10 @@ import java.util.concurrent.TimeUnit;
  * Created by ebrown on 2/9/2017.
  */
 public class UdpTest {
+    /**
+     *
+     * @param args
+     */
     public static void main(String... args) {
         try {
 
