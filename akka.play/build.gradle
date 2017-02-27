@@ -13,9 +13,10 @@ repositories {
 
 dependencies {
     compile group: 'com.sas.esp', name: 'dfx-esp-api', version: '4.1.0'
-    compile group: 'com.typesafe.akka', name: 'akka-actor_2.11', version: '2.4.16'
-    compile group: 'com.typesafe.akka', name: 'akka-stream_2.11', version: '2.4.16'
-    compile group: 'com.typesafe.akka', name: 'akka-cluster_2.11', version: '2.4.16'
+    compile group: 'com.typesafe.akka', name: 'akka-actor_2.11', version: '2.4.17'
+    compile group: 'com.typesafe.akka', name: 'akka-stream_2.11', version: '2.4.17'
+    compile group: 'com.typesafe.akka', name: 'akka-cluster_2.11', version: '2.4.17'
+
     compile group: 'org.elasticsearch.client', name: 'transport', version: '5.1.1'
     compile group: 'org.elasticsearch.client', name: 'rest', version: '5.1.1'
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.7'
